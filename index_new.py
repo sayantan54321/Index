@@ -21,10 +21,12 @@ def index_document(filepath):
         # Extract filename as title
         title = os.path.basename(filepath)
         # print(content, '\n\n\n')
+        # print(os.path.join(os.getcwd(), filepath));
         # Index the document
         es.index(index="myntra", body={
             "title": title,
-            "content": content
+            "content": content,
+            "path": os.path.join(os.getcwd(), filepath)
         })
 
     except Exception as e:
