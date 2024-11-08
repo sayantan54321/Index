@@ -20,13 +20,14 @@ def index_document(filepath):
         
         # Extract filename as title
         title = os.path.basename(filepath)
+        path = f"http://164.52.194.185/Knowledge/{os.path.relpath(filepath, '/var/www/html/Knowledge')}"
         # print(content, '\n\n\n')
         # print(os.path.join(os.getcwd(), filepath));
         # Index the document
         es.index(index="myntra", body={
             "title": title,
             "content": content,
-            "path": os.path.join(os.getcwd(), filepath)
+            "path": path
         })
 
     except Exception as e:
@@ -34,7 +35,7 @@ def index_document(filepath):
         ERR_FILES += 1
 
 # Directory containing your documents
-docs_dir = "Knowledge"
+docs_dir = "/var/www/html/Knowledge"
 
 # Index all documents in the directory
 for (root,dirs,files) in os.walk(docs_dir):
