@@ -3,10 +3,12 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.4.0
     container_name: elasticsearch
+    network_mode: host
     restart: always
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
+      - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
